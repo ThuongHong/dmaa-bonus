@@ -71,6 +71,55 @@ Các item phổ biến theo support giảm dần là:
     K(5),E(4),M(3),O(3),Y(3)
 \]
 
+Sắp xếp lại các item trong từng giao dịch theo thứ tự trên, ta được:
+
+\begin{center}
+    \begin{tabular}{|c|l|}
+        \hline
+        TID  & Itemset đã được sắp xếp \\
+        \hline
+        T100 & \{K,E,M,O,Y\}           \\
+        T200 & \{K,E,O,Y\}             \\
+        T300 & \{K,E,M\}               \\
+        T400 & \{K,M,Y\}               \\
+        T500 & \{K,E,O\}               \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \begin{forest}
+        for tree={
+        draw=none,
+        align=center,
+        parent anchor=south,
+        child anchor=north,
+        s sep=12mm,
+        l sep=10mm,
+        edge={draw}
+        }
+        [ROOT
+        [K:5
+        [E:4
+        [M:2
+        [O:1
+        [Y:1]
+        ]
+        ]
+        [O:2
+        [Y:1]
+        ]
+        ]
+        [M:1
+        [Y:1]
+        ]
+        ]
+        ]
+    \end{forest}
+    \caption{Cây FP được xây dựng từ các giao dịch đã sắp xếp}
+\end{figure}
+
 Từ FP-tree, ta thu được các conditional pattern base chính:
 \begin{itemize}
     \item Với $Y$: sinh được mẫu phổ biến $KY(3)$.

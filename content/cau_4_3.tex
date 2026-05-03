@@ -91,34 +91,37 @@ Giả sử CSDL $\mathcal{D}$ được chia thành $n$ partition không giao nha
     \mathcal{D}=D_1\cup D_2\cup \cdots \cup D_n
 \]
 
-Gọi $X$ là một itemset phổ biến trong $\mathcal{D}$:
+Gọi $X$ là một itemset phổ biến trong $\mathcal{D}$. Ký hiệu $\mathrm{count}_{\mathcal{D}}(X)$ là số transaction trong $\mathcal{D}$ chứa $X$. Khi đó:
 \[
-    \sup_{\mathcal{D}}(X)\ge \mathrm{minsup}
+    \mathrm{count}_{\mathcal{D}}(X)\ge \mathrm{minsup}\cdot |\mathcal{D}|
 \]
 
 Giả sử phản chứng rằng $X$ không phổ biến trong mọi partition. Khi đó:
 \[
-    \sup_{D_i}(X)<\mathrm{minsup}
+    \mathrm{count}_{D_i}(X)<\mathrm{minsup}\cdot |D_i|
     \quad \forall i = \overline{1,n}
 \]
 
-Do support toàn cục bằng tổng support trên các partition:
+Vì các partition không giao nhau, tổng số lần xuất hiện của $X$ trên toàn bộ CSDL bằng tổng số lần xuất hiện trên từng partition:
 \[
-    \sup_{\mathcal{D}}(X)
+    \mathrm{count}_{\mathcal{D}}(X)
     =
-    \sum_{i=1}^{n}\sup_{D_i}(X)
+    \sum_{i=1}^{n}\mathrm{count}_{D_i}(X)
     \implies
-    \sup_{\mathcal{D}}(X)
+    \mathrm{count}_{\mathcal{D}}(X)
     <
-    \sum_{i=1}^{n}\mathrm{minsup}
+    \sum_{i=1}^{n}\mathrm{minsup}\cdot |D_i|
+    =
+    \mathrm{minsup}\cdot \sum_{i=1}^{n}|D_i|
+    =
+    \mathrm{minsup}\cdot |\mathcal{D}|
 \]
 
 Mâu thuẫn với giả thiết rằng $X$ phổ biến trong $\mathcal{D}$.
 
 Do đó phải tồn tại ít nhất một partition $D_i$ sao cho:
 \[
-    \sup_{D_i}(X)\ge \mathrm{minsup}
+    \mathrm{count}_{D_i}(X)\ge \mathrm{minsup}\cdot |D_i|
 \]
 
 Tức là $X$ phổ biến trong ít nhất một partition.
-
