@@ -1,4 +1,33 @@
 \section{Câu 4.5}
 Section 4.2.2 describes a method for generating association rules from frequent itemsets. Propose a more efficient method. Explain why it is more efficient than the one proposed there. (Hint: consider incorporating the properties of Exercises 4.3(b), (c) into your design.)
 
-\paragraph{Lời giải}
+\paragraph{Lời giải\\}
+
+Sử dụng tính chất pruning của confidence:
+
+\begin{itemize}
+    \item Nếu một luật $s \Rightarrow (l-s)$ không đạt \textit{minconf}, thì mọi luật tạo từ các tập con của $s$ cũng sẽ không đạt \textit{minconf}.
+    \item Vì vậy, ta không cần sinh toàn bộ các tập con của $l$.
+\end{itemize}
+
+\begin{algorithm}[H]
+    \caption{Cải tiến thuật toán sinh luật kết hợp}
+    \begin{algorithmic}[1]
+        \Require Frequent itemset $l$, minimum confidence $minconf$
+        \ForAll{nonempty subsets $s \subset l$}
+        \State $conf \gets \dfrac{support(l)}{support(s)}$
+
+        \If{$conf \ge minconf$}
+        \State Output rule:
+        \[
+            s \Rightarrow (l - s)
+        \]
+        \State Continue exploring subsets of $s$
+        \Else
+        \State Prune all subsets of $s$
+        \EndIf
+        \EndFor
+    \end{algorithmic}
+    \label{alg:strong_rules}
+\end{algorithm}
+Phương pháp này hiệu quả hơn vì nó loại bỏ sớm các tập ứng viên không thể tạo ra luật mạnh. Nếu một luật không đạt \textit{minconf}, mọi mở rộng của nó cũng không cần xét tiếp. Do đó, số lượng tập con cần sinh và kiểm tra giảm đáng kể so với cách brute-force sinh toàn bộ $2^{|l|}-2$ tập con.

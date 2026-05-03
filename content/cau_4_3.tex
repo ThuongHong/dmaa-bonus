@@ -1,4 +1,6 @@
 \section{Câu 4.3}
+\label{sec:4_3}
+
 The Apriori algorithm makes use of prior knowledge of subset support properties.
 
 \begin{itemize}
@@ -8,4 +10,115 @@ The Apriori algorithm makes use of prior knowledge of subset support properties.
     \item[d.] A partitioning variation of Apriori subdivides the transactions of a database $\mathcal{D}$ into $n$ nonoverlapping partitions. Prove that any itemset that is frequent in $\mathcal{D}$ must be frequent in at least one partition of $\mathcal{D}$.
 \end{itemize}
 
-\paragraph{Lời giải}
+\paragraph{Lời giải\\}
+
+\noindent \textbf{a.}
+
+Gọi $X$ là một itemset phổ biến:
+\[
+    \sup(X)\ge \mathrm{minsup}
+\]
+
+Với mọi tập con khác rỗng $Y \subseteq X$, mọi transaction chứa $X$ đều chứa $Y$. Do đó:
+\[
+    T(X)\subseteq T(Y)
+    \implies
+    \sup(Y)\ge \sup(X)
+\]
+
+Vì:
+\[
+    \sup(X)\ge \mathrm{minsup}
+    \implies
+    \sup(Y)\ge \mathrm{minsup}
+\]
+
+Do đó mọi tập con khác rỗng của một itemset phổ biến cũng là phổ biến.
+
+\bigskip
+
+\noindent \textbf{b.}
+
+Cho $s' \subseteq s$.
+
+Mọi transaction chứa $s$ đều chứa $s'$, nên $T(s)\subseteq T(s')$
+
+Suy ra:
+\[
+    |T(s)|\le |T(s')|
+\]
+
+Do đó $\sup(s)\le \sup(s')$, hay $\sup(s')\ge \sup(s)$
+
+\bigskip
+
+\noindent \textbf{c.}
+
+Confidence của luật $s \Rightarrow (l-s)$ là:
+\[
+    \mathrm{conf}(s \Rightarrow (l-s))=\frac{\sup(l)}{\sup(s)}
+\]
+
+Tương tự:
+\[
+    \mathrm{conf}(s' \Rightarrow (l-s'))
+    =
+    \frac{\sup(l)}{\sup(s')}
+\]
+
+Vì $s' \subseteq s$, nên theo câu b: $\sup(s')\ge \sup(s)$
+
+Suy ra:
+\[
+    \frac{\sup(l)}{\sup(s')}
+    \le
+    \frac{\sup(l)}{\sup(s)}
+\]
+
+Do đó:
+\[
+    \mathrm{conf}(s' \Rightarrow (l-s'))
+    \le
+    \mathrm{conf}(s \Rightarrow (l-s))
+\]
+
+\bigskip
+
+\noindent \textbf{d.}
+
+Giả sử CSDL $\mathcal{D}$ được chia thành $n$ partition không giao nhau:
+\[
+    \mathcal{D}=D_1\cup D_2\cup \cdots \cup D_n
+\]
+
+Gọi $X$ là một itemset phổ biến trong $\mathcal{D}$:
+\[
+    \sup_{\mathcal{D}}(X)\ge \mathrm{minsup}
+\]
+
+Giả sử phản chứng rằng $X$ không phổ biến trong mọi partition. Khi đó:
+\[
+    \sup_{D_i}(X)<\mathrm{minsup}
+    \quad \forall i = \overline{1,n}
+\]
+
+Do support toàn cục bằng tổng support trên các partition:
+\[
+    \sup_{\mathcal{D}}(X)
+    =
+    \sum_{i=1}^{n}\sup_{D_i}(X)
+    \implies
+    \sup_{\mathcal{D}}(X)
+    <
+    \sum_{i=1}^{n}\mathrm{minsup}
+\]
+
+Mâu thuẫn với giả thiết rằng $X$ phổ biến trong $\mathcal{D}$.
+
+Do đó phải tồn tại ít nhất một partition $D_i$ sao cho:
+\[
+    \sup_{D_i}(X)\ge \mathrm{minsup}
+\]
+
+Tức là $X$ phổ biến trong ít nhất một partition.
+
