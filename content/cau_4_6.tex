@@ -1,0 +1,29 @@
+\section{Câu 4.6}
+A database has five transactions. Let \texttt{min\_sup} = 60\% and \texttt{min\_conf} = 80\%.
+
+\begin{center}
+    \begin{tabular}{|c|l|}
+        \hline
+        TID  & items\_bought        \\
+        \hline
+        T100 & \{M, O, N, K, E, Y\} \\
+        T200 & \{D, O, N, K, E, Y\} \\
+        T300 & \{M, A, K, E\}       \\
+        T400 & \{M, U, C, K, Y\}    \\
+        T500 & \{C, O, K, I, E\}    \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item[a.] Find all frequent itemsets using Apriori and FP-growth, respectively. Compare the efficiency of the two mining processes.
+    \item[b.] List all the strong association rules (with support $s$ and confidence $c$) matching the following metarule, where $X$ is a variable representing customers, and $item_i$ denotes variables representing items:
+          \[
+              \begin{aligned}
+                  \forall x \in transaction,\; & buys(X,item_1) \land buys(X,item_2)   \\
+                                               & \Rightarrow buys(X,item_3)\quad [s,c]
+              \end{aligned}
+          \]
+\end{itemize}
+
+\paragraph{Lời giải}

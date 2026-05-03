@@ -1,0 +1,35 @@
+\section{Câu 4.8}
+A database has four transactions. Let \texttt{min\_sup} = 60\% and \texttt{min\_conf} = 80\%.
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|c|c|X|}
+        \hline
+        cust\_ID & TID  & items\_bought (in the form of brand-item\_category)                        \\
+        \hline
+        01       & T100 & \{King's-Crab, Sunset-Milk, Dairyland-Cheese, Best-Bread\}                 \\
+        02       & T200 & \{Best-Cheese, Dairyland-Milk, Goldenfarm-Apple, Tasty-Pie, Wonder-Bread\} \\
+        01       & T300 & \{Westcoast-Apple, Dairyland-Milk, Wonder-Bread, Tasty-Pie\}               \\
+        03       & T400 & \{Wonder-Bread, Sunset-Milk, Dairyland-Cheese\}                            \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{itemize}
+    \item[a.] At the granularity of item\_category (e.g., $item_i$ could be ``Milk''), for the rule template,
+          \[
+              \begin{aligned}
+                  \forall X \in transaction,\; & buys(X,item_1) \land buys(X,item_2)    \\
+                                               & \Rightarrow buys(X,item_3)\quad [s,c],
+              \end{aligned}
+          \]
+          list the frequent $k$-itemset for the largest $k$, and all the strong association rules (with their support $s$ and confidence $c$) containing the frequent $k$-itemset for the largest $k$.
+    \item[b.] At the granularity of brand-item\_category (e.g., $item_i$ could be ``Sunset-Milk''), for the rule template,
+          \[
+              \begin{aligned}
+                  \forall X \in customer,\; & buys(X,item_1) \land buys(X,item_2) \Rightarrow buys(X,item_3),
+              \end{aligned}
+          \]
+          list the frequent $k$-itemset for the largest $k$ (but do not print any rules).
+\end{itemize}
+
+\paragraph{Lời giải}
