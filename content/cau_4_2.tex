@@ -6,4 +6,34 @@ An itemset $\mathcal{X}$ is called a generator on a data set $\mathcal{D}$ if th
     \item[b.] What is the relationship between closed itemsets and generators?
 \end{itemize}
 
-\paragraph{Lời giải}
+\pagebreak
+
+\paragraph{Lời giải\\}
+
+\noindent \textbf{a.}
+
+Không thể xác định itemset $\mathcal{A}$ là phổ biến và support của $\mathcal{A}$ chỉ dựa trên tập $\mathcal{G}$ và support của các tập phổ biến sinh, vì có thể tồn tại itemset $\mathcal{X}$ không phải là tập sinh nhưng có cùng support với một tập sinh khác nên thông tin về về itemset đó không xuất hiện trong $\mathcal{G}$
+
+Ví dụ:
+\[
+    \sup(\{A\})=\sup(\{A,B\})
+\]
+thì $\{A,B\}$ không phải tập sinh, nên thông tin về $\{A,B\}$ không xuất hiện trong $\mathcal{G}$.
+
+Do đó cần thêm:
+\begin{itemize}
+    \item Tập phổ biến đóng $\mathcal{C}$,
+    \item Support của từng tập đóng trong $\mathcal{C}$.
+\end{itemize}
+
+Khi đó thuật toán kiểm tra tính phổ biến của tập $\mathcal{A}$ sẽ giống như thuật toán \ref{alg:1}.
+
+\bigskip
+
+\noindent \textbf{b.}
+
+Với mỗi itemset phổ biến $X$, gọi $C(X)$ là tập đóng tương ứng và $G(X)$ là tập các tập sinh của lớp tương đương chứa $X$. Ta luôn có:
+\begin{enumerate}
+    \item $\forall g \in G(X): g \subseteq X \subseteq C(X)$.
+    \item $\sup(g) = \sup(X) = \sup(C(X))$.
+\end{enumerate}
