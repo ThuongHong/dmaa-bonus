@@ -33,3 +33,69 @@ A database has four transactions. Let \texttt{min\_sup} = 60\% and \texttt{min\_
 \end{itemize}
 
 \paragraph{Lời giải}
+\noindent \textbf{a.}
+
+Ở mức \textit{item\_category}, bỏ phần brand:
+\begin{itemize}
+    \item $T100=\{\text{Crab, Milk, Cheese, Bread}\}$
+    \item $T200=\{\text{Cheese, Milk, Apple, Pie, Bread}\}$
+    \item $T300=\{\text{Apple, Milk, Bread, Pie}\}$
+    \item $T400=\{\text{Bread, Milk, Cheese}\}$
+\end{itemize}
+
+Vì $\texttt{min\_sup}=60\%$ và có $4$ transaction, nên ngưỡng support tối thiểu là:
+\[
+    0.6 \times 4 = 2.4 \Rightarrow 3
+\]
+
+Các tập phổ biến lớn nhất có độ dài $k=3$ và chỉ có một tập phổ biến $3$-phần tử:
+\[
+    \{\text{Bread, Milk, Cheese}\}
+\]
+với support:
+\[
+    \frac{3}{4}=75\%
+\]
+
+Các luật kết hợp mạnh chứa tập phổ biến $3$-phần tử này là:
+\[
+    \text{Bread} \land \text{Cheese} \Rightarrow \text{Milk}
+    \quad [s=75\%,\; c=\frac{3}{3}=100\%]
+\]
+\[
+    \text{Cheese} \land \text{Milk} \Rightarrow \text{Bread}
+    \quad [s=75\%,\; c=\frac{3}{3}=100\%]
+\]
+\[
+    \text{Cheese} \Rightarrow \text{Milk} \land \text{Bread}
+    \quad [s=75\%,\; c=\frac{3}{3}=100\%]
+\]
+
+Các luật còn lại không mạnh vì:
+\[
+    \frac{3}{4}=75\% < 80\%
+\]
+
+\bigskip
+
+\noindent \textbf{b.}
+
+Ở mức \textit{brand-item\_category} với $X \in customer$, gộp toàn bộ giao dịch của cùng một khách hàng:
+\begin{itemize}
+    \item Customer $01$: \{King's-Crab, Sunset-Milk, Dairyland-Cheese, Best-Bread, Westcoast-Apple, Dairyland-Milk, Wonder-Bread, Tasty-Pie\}
+    \item Customer $02$: \{Best-Cheese, Dairyland-Milk, Goldenfarm-Apple, Tasty-Pie, Wonder-Bread\}
+    \item Customer $03$: \{Wonder-Bread, Sunset-Milk, Dairyland-Cheese\}
+\end{itemize}
+
+Vì có $3$ customer nên ngưỡng support tối thiểu là:
+\[
+    0.6 \times 3 = 1.8 \Rightarrow 2
+\]
+
+Các tập phổ biến lớn nhất có độ dài $k=3$:
+\[
+    \{\text{Wonder-Bread, Dairyland-Milk, Tasty-Pie}\}
+\]
+\[
+    \{\text{Wonder-Bread, Sunset-Milk, Dairyland-Cheese}\}
+\]

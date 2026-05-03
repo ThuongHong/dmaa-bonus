@@ -2,3 +2,52 @@
 Give a short example to show that items in a strong association rule actually may be negatively correlated.
 
 \paragraph{Lời giải}
+Xét bảng đếm sau:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+                           & $B$ & $\overline{B}$ & $\Sigma_{row}$ \\
+        \hline
+        $A$                & 65  & 40             & 105            \\
+        \hline
+        $\overline{A}$     & 35  & 10             & 45             \\
+        \hline
+        $\Sigma_{col}$     & 100 & 50             & 150            \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Giả sử:
+\[
+    \textit{minsup}=40\%, \qquad \textit{minconf}=60\%
+\]
+
+Xét luật:
+\[
+    A \Rightarrow B
+\]
+
+Ta có:
+\[
+    \mathrm{support}(A \Rightarrow B)=\frac{65}{150}=43.3\%
+\]
+\[
+    \mathrm{confidence}(A \Rightarrow B)=\frac{65}{105}\approx 61.9\%
+\]
+
+Vì support và confidence đều vượt ngưỡng, nên đây là một \textbf{luật kết hợp mạnh}.
+
+Nhưng nếu xét:
+\[
+    \mathrm{corr}(A,B)=\frac{P(A\cap B)}{P(A)P(B)}
+\]
+thì:
+\[
+    P(A\cap B)=\frac{65}{150},\quad P(A)=\frac{105}{150}=0.7,\quad P(B)=\frac{100}{150}\approx 0.667
+\]
+\[
+    \mathrm{corr}(A,B)=\frac{0.433}{0.7\times 0.667}\approx 0.928 < 1
+\]
+
+Do đó, dù $A \Rightarrow B$ là luật mạnh, $A$ và $B$ vẫn \textbf{tương quan âm}.

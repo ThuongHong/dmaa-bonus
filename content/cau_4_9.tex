@@ -2,3 +2,17 @@
 Suppose that a large store has a transactional database that is distributed among four locations. Transactions in each component database have the same format, namely $T_j : \{i_1,\ldots,i_m\}$, where $T_j$ is a transaction identifier, and $i_k$ $(1 \leq k \leq m)$ is the identifier of an item purchased in the transaction. Propose an efficient algorithm to mine global association rules. Your algorithm should not require shipping all the data to one site and should not cause excessive network communication overhead.
 
 \paragraph{Lời giải}
+Một thuật toán hiệu quả để khai thác luật kết hợp toàn cục là:
+
+\begin{enumerate}
+    \item Tại mỗi địa điểm, khai thác các tập mục phổ biến cục bộ với cùng ngưỡng \textit{minsup}. Gọi $CF$ là hợp của tất cả các tập mục phổ biến cục bộ:
+          \[
+              CF = \bigcup_{i=1}^{4} L_i
+          \]
+    \item Gửi danh sách $CF$ đến từng địa điểm. Mỗi địa điểm chỉ cần tính support cục bộ của các itemset trong $CF$, thay vì gửi toàn bộ transaction.
+    \item Cộng các support cục bộ của từng itemset trong $CF$ để thu được support toàn cục.
+    \item Giữ lại các itemset có support toàn cục đạt ngưỡng \textit{minsup}; đó là các tập mục phổ biến toàn cục.
+    \item Từ các tập mục phổ biến toàn cục, sinh các luật kết hợp mạnh theo ngưỡng \textit{minconf}.
+\end{enumerate}
+
+Ưu điểm: không cần gom toàn bộ dữ liệu về một nơi, chỉ trao đổi $CF$ và support count, và không bỏ sót tập mục phổ biến toàn cục.

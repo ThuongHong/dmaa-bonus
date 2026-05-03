@@ -1,7 +1,7 @@
 \section{Câu 4.1}
 Suppose you have the set $\mathcal{C}$ of all frequent closed itemsets on a data set $\mathcal{D}$, as well as the support count for each frequent closed itemset. Describe an algorithm to determine whether a given itemset $\mathcal{X}$ is frequent or not, and the support of $\mathcal{X}$ if it is frequent.
 
-\paragraph{Lời giải\\}
+\paragraph{Lời giải}
 Itemset $\mathcal{X}$ là phổ biến khi và chỉ khi itemset $\mathcal{X}$ là một tập con của một itemset phổ biến đóng $\mathcal{Y} \in \mathcal{C}$, và $\text{sup}(\mathcal{X}) = \max\{\text{sup}(\mathcal{Y})\mid\mathcal{Y} \in \mathcal{C}, \mathcal{X} \subseteq \mathcal{Y}\}$.
 
 Thuật toán:
@@ -11,9 +11,9 @@ Thuật toán:
         \Require $\mathcal{C}$, $\text{sup\_of\_sets}$, $X$
         \State $\text{sup\_X} \gets \max(\{ \text{sup\_of\_sets}[Y] \mid Y \in \mathcal{C}, X \subseteq Y \} \cup \{0\})$
         \If{$\text{sup\_X} > 0$}
-        \State \textbf{return} ``Frequent'', $\text{sup\_X}$
+        \State \textbf{return} ``Phổ biến'', $\text{sup\_X}$
         \Else
-        \State \textbf{return} ``Not frequent''
+        \State \textbf{return} ``Không phổ biến''
         \EndIf
     \end{algorithmic}
     \label{alg:1}

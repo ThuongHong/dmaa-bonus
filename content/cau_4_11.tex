@@ -2,3 +2,32 @@
 Most frequent pattern mining algorithms consider only distinct items in a transaction. However, multiple occurrences of an item in the same shopping basket, such as four cakes and three jugs of milk, can be important in transactional data analysis. How can one mine frequent itemsets efficiently considering multiple occurrences of items? Propose modifications to the well-known algorithms, such as Apriori and FP-growth, to adapt to such a situation.
 
 \paragraph{Lời giải}
+Để xét nhiều lần xuất hiện của cùng một item, ta biểu diễn item kèm số lượng, chẳng hạn $(A{:}1)$, $(A{:}2)$, $(A{:}3)$, trong đó $(A{:}q)$ nghĩa là transaction chứa ít nhất $q$ bản sao của $A$.
+
+\bigskip
+
+\noindent \textbf{Sửa đổi Apriori}
+
+\begin{itemize}
+    \item Ở bước sinh $L_1$, mỗi cặp $(i{:}q)$ được xem như một item riêng, và support của nó là số transaction có chứa ít nhất $q$ bản sao của $i$.
+    \item Khi sinh candidate $k$-itemset, vẫn dùng join và prune như Apriori, nhưng kiểm tra theo số lượng.
+    \item Một transaction $T$ hỗ trợ itemset định lượng $X$ nếu:
+          \[
+              \forall (i{:}q)\in X,\; count_T(i)\ge q
+          \]
+    \item Sau đó tiếp tục sinh $L_2,L_3,\dots$ như Apriori chuẩn.
+\end{itemize}
+
+Ví dụ, transaction chứa $4$ cakes và $3$ jugs of milk sẽ hỗ trợ $(cake{:}1),\dots,(cake{:}4)$ và $(milk{:}1),\dots,(milk{:}3)$.
+
+\bigskip
+
+\noindent \textbf{Sửa đổi FP-growth}
+
+\begin{itemize}
+    \item Khi xây dựng FP-tree, mỗi item cũng được thay bằng dạng định lượng $(i{:}q)$.
+    \item Mỗi transaction được chuyển thành tập các item định lượng mà nó hỗ trợ, sau đó sắp theo thứ tự support giảm dần để chèn vào cây.
+    \item Quá trình khai thác conditional pattern base và conditional FP-tree vẫn giữ nguyên ý tưởng của FP-growth, nhưng phải bảo toàn thông tin về số lượng của từng item.
+\end{itemize}
+
+Tóm lại, cả Apriori và FP-growth đều có thể mở rộng bằng cách thay mô hình nhị phân bằng mô hình \textit{item kèm số lượng}.

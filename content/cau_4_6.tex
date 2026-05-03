@@ -27,3 +27,88 @@ A database has five transactions. Let \texttt{min\_sup} = 60\% and \texttt{min\_
 \end{itemize}
 
 \paragraph{Lời giải}
+\noindent \textbf{a.}
+
+Vì có $5$ transaction và $\texttt{min\_sup}=60\%$, nên ngưỡng support tối thiểu là:
+\[
+    0.6 \times 5 = 3
+\]
+
+\textbf{Dùng Apriori}
+
+\begin{itemize}
+    \item Tập phổ biến $1$-phần tử:
+          \[
+              L_1=\{E(4),K(5),M(3),O(3),Y(3)\}
+          \]
+    \item Candidate $2$-itemset:
+          \[
+              C_2=\{EK,EM,EO,EY,KM,KO,KY,MO,MY,OY\}
+          \]
+    \item Tập phổ biến $2$-phần tử:
+          \[
+              L_2=\{EK(4),EO(3),KM(3),KO(3),KY(3)\}
+          \]
+    \item Candidate $3$-itemset sau bước prune:
+          \[
+              C_3=\{EKO\}
+          \]
+    \item Tập phổ biến $3$-phần tử:
+          \[
+              L_3=\{EKO(3)\}
+          \]
+\end{itemize}
+
+Do không sinh thêm được ứng viên độ dài $4$, tập mục phổ biến cuối cùng là:
+\[
+    \{E,K,M,O,Y,EK,EO,KM,KO,KY,EKO\}
+\]
+
+\textbf{Dùng FP-growth}
+
+Các item phổ biến theo support giảm dần là:
+\[
+    K(5),E(4),M(3),O(3),Y(3)
+\]
+
+Từ FP-tree, ta thu được các conditional pattern base chính:
+\begin{itemize}
+    \item Với $Y$: sinh được mẫu phổ biến $KY(3)$.
+    \item Với $O$: sinh được các mẫu phổ biến $EO(3)$, $KO(3)$, $EKO(3)$.
+    \item Với $M$: sinh được mẫu phổ biến $KM(3)$.
+    \item Với $E$: sinh được mẫu phổ biến $EK(4)$.
+\end{itemize}
+
+Do đó FP-growth cũng thu được đúng tập mục phổ biến:
+\[
+    \{E,K,M,O,Y,EK,EO,KM,KO,KY,EKO\}
+\]
+
+\textbf{So sánh:} Apriori phải sinh candidate và quét CSDL nhiều lần, còn FP-growth khai thác trực tiếp trên FP-tree nên thường hiệu quả hơn.
+
+\bigskip
+
+\noindent \textbf{b.}
+
+Mẫu luật yêu cầu vế trái gồm $2$ item và vế phải gồm $1$ item, nên chỉ cần xét tập phổ biến $3$-phần tử:
+\[
+    EKO \quad \text{với support } \frac{3}{5}=60\%
+\]
+
+Các luật mạnh là:
+\[
+    \{K,O\}\Rightarrow \{E\}
+    \quad [s=60\%,\; c=\frac{\sup(EKO)}{\sup(KO)}=\frac{3}{3}=100\%]
+\]
+\[
+    \{E,O\}\Rightarrow \{K\}
+    \quad [s=60\%,\; c=\frac{\sup(EKO)}{\sup(EO)}=\frac{3}{3}=100\%]
+\]
+
+\[
+    \{E,K\}\Rightarrow \{O\}
+\]
+không mạnh vì:
+\[
+    c=\frac{\sup(EKO)}{\sup(EK)}=\frac{3}{4}=75\% < 80\%
+\]

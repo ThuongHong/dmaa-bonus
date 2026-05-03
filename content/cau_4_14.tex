@@ -21,3 +21,94 @@ The following contingency table summarizes supermarket transaction data, where \
 \end{itemize}
 
 \paragraph{Lời giải}
+\noindent \textbf{a.}
+
+Xét luật:
+\[
+    hot\ dogs \Rightarrow hamburgers
+\]
+ta có:
+\[
+    \mathrm{support}=\frac{2000}{5000}=40\%
+\]
+\[
+    \mathrm{confidence}=\frac{2000}{3000}=66.7\%
+\]
+
+Vì:
+\[
+    40\% \ge 25\%, \qquad 66.7\% \ge 50\%
+\]
+nên đây là một \textbf{luật kết hợp mạnh}.
+
+\bigskip
+
+\noindent \textbf{b.}
+
+Nếu hai mặt hàng độc lập thì phải có:
+\[
+    P(hot\ dogs \cap hamburgers)=P(hot\ dogs)\,P(hamburgers)
+\]
+
+Trong dữ liệu đã cho:
+\[
+    \begin{aligned}
+        P(hot\ dogs)                 & =\frac{3000}{5000}=0.6, \\
+        P(hamburgers)               & =\frac{2500}{5000}=0.5, \\
+        P(hot\ dogs \cap hamburgers) & =\frac{2000}{5000}=0.4
+    \end{aligned}
+\]
+
+Do đó:
+\[
+    \frac{P(hot\ dogs \cap hamburgers)}{P(hot\ dogs)\,P(hamburgers)}
+    =
+    \frac{0.4}{0.6 \times 0.5}
+    =
+    1.333 > 1
+\]
+
+Vì vậy, hai mặt hàng \textbf{không độc lập} và có \textbf{tương quan dương}.
+
+\bigskip
+
+\noindent \textbf{c.}
+
+Ta có:
+\[
+    \mathrm{conf}(hot\ dogs \Rightarrow hamburgers)=\frac{2000}{3000}=\frac{2}{3}\approx 0.667
+\]
+\[
+    \mathrm{conf}(hamburgers \Rightarrow hot\ dogs)=\frac{2000}{2500}=0.8
+\]
+
+Suy ra các độ đo:
+\[
+    all\_confidence = \min\left(\frac{2}{3},0.8\right)=\frac{2}{3}\approx 0.667
+\]
+\[
+    max\_confidence = \max\left(\frac{2}{3},0.8\right)=0.8
+\]
+\[
+    Kulc = \frac{1}{2}\left(\frac{2}{3}+0.8\right)=\frac{11}{15}\approx 0.733
+\]
+\[
+    cosine = \frac{P(hot\ dogs \cap hamburgers)}{\sqrt{P(hot\ dogs)P(hamburgers)}}
+    = \frac{0.4}{\sqrt{0.6 \times 0.5}}
+    \approx 0.730
+\]
+
+\[
+    lift = \frac{0.4}{0.6 \times 0.5}=1.333
+\]
+
+Dùng hệ số tương quan $\phi$ cho bảng $2 \times 2$:
+\[
+    \phi
+    =
+    \frac{2000 \times 1500 - 500 \times 1000}
+    {\sqrt{2500 \times 2500 \times 3000 \times 2000}}
+    \approx 0.408
+\]
+
+Tất cả các độ đo đều cho thấy quan hệ dương. Trong đó, $all\_confidence$ là chặt nhất, $max\_confidence$ là lớn nhất, còn $Kulc$ và $cosine$ cân bằng hơn vì xét cả hai hướng.

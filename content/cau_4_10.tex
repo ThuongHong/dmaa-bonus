@@ -2,3 +2,10 @@
 Suppose that frequent itemsets are saved for a large transactional database, $DB$. Discuss how to efficiently mine the (global) association rules under the same minimum support threshold, if a set of new transactions, denoted as $\Delta DB$, is (incrementally) added in.
 
 \paragraph{Lời giải}
+Xem $DB$ và $\Delta DB$ là hai partition của CSDL cập nhật:
+\begin{itemize}
+    \item Với các itemset đã phổ biến trong $DB$, chỉ cần quét $\Delta DB$ một lần để cộng thêm support, rồi kiểm tra xem chúng còn phổ biến trong $DB \cup \Delta DB$ hay không.
+    \item Với các itemset phổ biến trong $\Delta DB$ nhưng chưa phổ biến trong $DB$, quét $DB$ một lần để lấy thêm support của chúng, rồi kiểm tra lại trên $DB \cup \Delta DB$.
+\end{itemize}
+
+Sau đó sinh các luật kết hợp mạnh từ tập mục phổ biến mới. Cách này tránh khai thác lại từ đầu.

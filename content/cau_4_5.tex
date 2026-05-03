@@ -1,7 +1,7 @@
 \section{Câu 4.5}
 Section 4.2.2 describes a method for generating association rules from frequent itemsets. Propose a more efficient method. Explain why it is more efficient than the one proposed there. (Hint: consider incorporating the properties of Exercises 4.3(b), (c) into your design.)
 
-\paragraph{Lời giải\\}
+\paragraph{Lời giải}
 
 Sử dụng tính chất pruning của confidence:
 
@@ -13,7 +13,7 @@ Sử dụng tính chất pruning của confidence:
 \begin{algorithm}[H]
     \caption{Cải tiến thuật toán sinh luật kết hợp}
     \begin{algorithmic}[1]
-        \Require Frequent itemset $l$, minimum confidence $minconf$
+        \Require Tập phổ biến $l$, minimum confidence $minconf$
         \ForAll{nonempty subsets $s \subset l$}
         \State $conf \gets \dfrac{support(l)}{support(s)}$
 
